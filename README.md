@@ -8,4 +8,4 @@
 ## <p> Contact <p/>
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-Connect-blue?style=flat-square&logo=linkedin)](https://www.linkedin.com/in/lakis-panteli-a6ab6a21a/)
 [![GitHub](https://img.shields.io/badge/GitHub-Follow-181717?style=flat-square&logo=github)](https://github.com/LakisPanteli/)
-<p> lakispanteli@hotmail.co.uk <p/>
+**<p> Email:** *lakispanteli@hotmail.co.uk <p/>*
