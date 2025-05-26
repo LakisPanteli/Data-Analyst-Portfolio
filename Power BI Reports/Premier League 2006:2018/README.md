@@ -24,5 +24,5 @@
 ## <p> Project Aims <p/>
 **<p> <li> Football Insights:** Provide key insights to to understand overall trends in the Premier League. <p/>
 **<p> <li> Team Specific Insights:** Identify best and worst performing teams. <p/>
-**<p> <li> Undrstanding Leicester City 2015/2016 Success:** Analysing Leicester City's success in 2015/2016. <p/>
+**<p> <li> Understanding Leicester City 2015/2016 Success:** Analysing Leicester City's success in 2015/2016. <p/>
 
