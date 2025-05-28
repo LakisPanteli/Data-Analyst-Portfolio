@@ -1,1 +1,11 @@
-# SQL and Power BI Projects
+# <p>SQL and Power BI Projects</p>
+<p> This folder contains projects where I analysed data using SQL and Power BI for data visualtion. I use data analysis to provide key insights and visualise them in an appealing and interactive manner.</p>
+
+## <p> Projects </p>
+**<p> Pizza Store Sales** </p>
+<p> - Description: Analyses pizza sales data to provide insights into customer preferences, popular items and pricing stategies.</p>
+<p> - Target Audience: Restaurant owners, marketing teams and suppliers.</p>
+
+**<p> Video Game Analysis** </p>
+<p> - Description: Analyses pizza sales data to provide insights into customer preferences, popular items and pricing stategies.</p>
+<p> - Target Audience: Restaurant owners, marketing teams and suppliers.</p>
