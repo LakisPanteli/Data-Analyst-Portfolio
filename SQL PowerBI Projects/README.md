@@ -4,7 +4,7 @@
 ## <p> Projects </p>
 **<p> 1. Pizza Store Sales** </p>
 <p> - Description: Analyses pizza sales data to provide insights into customer preferences, popular items and pricing stategies.</p>
-<p> - Target Audience: Restaurant owners, marketing teams and suppliers.</p>
+<p> - Target Audience: This project is designed to provide actionable insights to restaurant owners, marketing teams and suppliers.</p>
 
 **<p> 2. Video Game Analysis** </p>
 <p> - Description: Analyses pizza sales data to provide insights into customer preferences, popular items and pricing stategies.</p>
