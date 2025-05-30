@@ -1,0 +1,128 @@
+-- XBOX
+SELECT * FROM XboxOne_GameSales
+SELECT DISTINCT(Genre) FROM XboxOne_GameSales
+
+-- Xbox Top Game
+SELECT TOP 1 Game, 
+	Global AS Total_Revenue
+FROM XboxOne_GameSales
+ORDER BY Global DESC
+
+-- Xbox Top Genre
+SELECT TOP 1 Genre, 
+	ROUND(SUM(Global),2) AS Total_Revenue
+FROM XboxOne_GameSales
+GROUP BY Genre
+ORDER BY SUM(Global) DESC
+
+-- Xbox Global Revenue
+SELECT SUM(Global) FROM XboxOne_GameSales
+
+--Xbox Total Games
+SELECT COUNT (DISTINCT[Game]) FROM XboxOne_GameSales
+
+-- Xbox Top 5 Game
+SELECT TOP 5 Game, 
+	ROUND(Global, 2) AS Total_Revenue
+from XboxOne_GameSales
+ORDER BY Global DESC
+
+--Xbox Top 5 Genre
+SELECT TOP 5 Genre, 
+	ROUND(SUM(Global), 2) AS Total_Revenue
+FROM XboxOne_GameSales
+GROUP BY Genre
+ORDER BY SUM(Global) DESC
+
+--Xbox Top 5 Publishers
+SELECT Top 5 Publisher, 
+	ROUND(SUM(Global), 2) AS Total_Revenue
+from XboxOne_GameSales
+GROUP BY Publisher
+ORDER BY SUM(Global) DESC
+
+-- Xbox Publisher Count of Games
+SELECT Publisher, COUNT(Publisher) AS Total_Publishes
+FROM XboxOne_GameSales
+GROUP BY Publisher
+ORDER BY COUNT(Publisher) DESC 
+
+--Xbox Global Sales by Year
+SELECT Year, ROUND(SUM(Global),2) AS Total_Revenue
+FROM XboxOne_GameSales
+WHERE Year BETWEEN 2013 AND 2018
+GROUP BY Year
+
+-- Xbox Global Sales by Region
+SELECT ROUND(SUM(North_America),2) AS Revenue_in_NA,
+	ROUND(SUM(Europe),2) AS Revenue_in_EU,
+	ROUND(SUM(Japan),2) AS Revenue_in_JP,
+	ROUND(SUM(Rest_of_World),2) AS Revenue_in_Other,
+	ROUND(SUM(Global),2) AS Global_Revenue
+FROM XboxOne_GameSales
+
+
+-- PS4 
+SELECT * FROM PS4_GamesSales
+SELECT DISTINCT(Genre) FROM PS4_GamesSales
+
+-- PS4 Top Game
+SELECT TOP 1 Game, 
+	Global AS Total_Revenue
+FROM PS4_GamesSales
+ORDER BY Global DESC
+
+-- PS4 Top Genre
+SELECT TOP 1 Genre, 
+	ROUND(SUM(Global),2) AS Total_Revenue
+FROM PS4_GamesSales
+GROUP BY Genre
+ORDER BY SUM(Global) DESC
+
+-- PS4 Global Revenue
+SELECT SUM(Global) FROM PS4_GamesSales
+
+--PS4 Total Games
+SELECT COUNT (DISTINCT[Game]) FROM PS4_GamesSales
+
+-- PS4 Top 5 Game
+SELECT TOP 5 Game, 
+	ROUND(Global, 2) AS Total_Revenue
+from PS4_GamesSales
+ORDER BY Global DESC
+
+--PS4 Top 5 Genre
+SELECT TOP 5 Genre, 
+	ROUND(SUM(Global), 2) AS Total_Revenue
+FROM PS4_GamesSales
+GROUP BY Genre
+ORDER BY SUM(Global) DESC
+
+--PS4 Top 5 Publishers
+SELECT Top 5 Publisher, 
+	ROUND(SUM(Global), 2) AS Total_Revenue
+FROM PS4_GamesSales
+GROUP BY Publisher
+ORDER BY SUM(Global) DESC
+
+-- PS4 Publisher Count of Games
+SELECT Publisher, COUNT(Publisher) AS Total_Publishes
+FROM PS4_GamesSales
+GROUP BY Publisher
+ORDER BY COUNT(Publisher) DESC 
+
+--PS4 Global Sales by Year
+SELECT Year, ROUND(SUM(Global),2) AS Total_Revenue
+FROM PS4_GamesSales
+WHERE Year BETWEEN 2013 AND 2018
+GROUP BY Year
+
+-- PS4 Global Sales by Region
+SELECT ROUND(SUM(North_America),2) AS Revenue_in_NA,
+	ROUND(SUM(Europe),2) AS Revenue_in_EU,
+	ROUND(SUM(Japan),2) AS Revenue_in_JP,
+	ROUND(SUM(Rest_of_World),2) AS Revenue_in_Other,
+	ROUND(SUM(Global),2) AS Global_Revenue
+FROM PS4_GamesSales
+
+
