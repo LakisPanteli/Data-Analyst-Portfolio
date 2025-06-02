@@ -1,5 +1,7 @@
 # Tableau Projects
-<p> This file contains a link to my Tableau profile, where dashboards I have created can be found: **<p> Tableau:** *https://public.tableau.com/app/profile/lakis.panteli/vizzes* </p>
+<p> This file contains a link to my Tableau profile, where dashboards I have created can be found: 
+
+  **<p> Tableau:** *https://public.tableau.com/app/profile/lakis.panteli/vizzes* </p>
 
 ## <p> 1. Discount Mart Sales Analysis <p/>
 <p> This project analyses sales, profit and quantity for Discount Mart supermarket. The owner, Grant Frost, would like a dashboard with insights into his supermarkets performance.</p>
