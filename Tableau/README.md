@@ -1,7 +1,7 @@
 # Tableau Projects
 <p> This folder contains a link to my Tableau profile, where dashboards I have created can be found. </p>
 
-## <p> Discount Mart Sales Analysis <p/>
+## <p> 1. Discount Mart Sales Analysis <p/>
 <p> This project analyses sales, profit and quantity for Discount Mart supermarket. The owner, Grant Frost, would like a dashboard with insights into his supermarkets performance.</p>
 
 **<p><li> Key Performance Indicators (KPIs):** </li></p>
