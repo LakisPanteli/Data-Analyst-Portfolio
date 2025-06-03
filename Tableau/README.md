@@ -42,7 +42,7 @@
 <p> 3. Average Income per Age.</p>
 <p> 4. Employee Count by Income.</p>
 <p> 5. Employee Count by Years Worked.</p>
-<p> 6. Average Monthyl income.</p>
+<p> 6. Average Monthly income.</p>
 <p> 7. Average Job Satisfaction.</p>
 
 ## <p> Benefits of this project <p/>
