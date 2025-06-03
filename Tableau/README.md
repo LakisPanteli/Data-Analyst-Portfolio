@@ -32,3 +32,20 @@
 **<p> <li> Market Trends:** Provides key insights into stock price trends for Tesla. <p/>
 **<p> <li> Stock Trader Trends:** Idenitfy trends in quantity of stocks traded, historically. <p/>
 **<p> <li> Price Trends:** Idenitfy price trends of the Tesla stock. <p/>
+
+## <p> 3. Green Destinations HR Analysis <p/>
+<p> Green Destinations is a well known travle agency. This project is based on the HR Director asking for trends in attrition (employees leaving). </p>
+
+**<p><li> Key Performance Indicators (KPIs):** </li></p>
+<p> 1. Attrition Rate.</p>
+<p> 2. Employee Count by Age.</p>
+<p> 3. Average Income per Age.</p>
+<p> 4. Employee Count by Income.</p>
+<p> 5. Employee Count by Years Worked.</p>
+<p> 6. Average Monthyl income.</p>
+<p> 7. Average Job Satisfaction.</p>
+
+## <p> Benefits of this project <p/>
+**<p> <li> Attrition Trends:** Provides key insights into trends in attrition, comparing Age Groups, Income and Years Worked. <p/>
+**<p> <li> Employee Satisfaction:** Identify employee satisfaction in their role. <p/>
+**<p> <li> Income Trends:** Idenitfy Average Income and Amount from Average, identifying any trends this has with the attition rate. <p/>
