@@ -3,7 +3,7 @@
 
 ## <p> About The Project <p/>
 ### <p>Key Performance Indicators (KPIs)<p/>
-**<p> <li> Total Revenue:** The sum of the total price of all pizza orders.<p/>
+**<p> <li> Total Sales:** The sum of the total price of all pizza orders.<p/>
 **<p> <li> Average Order Value:** The average amount spent per order, calculated by dividng the total revenue by the total number of orders.<p/>
 **<p> <li> Total Pizzas Sold:** The sum of the quantities of all pizzas sold.<p/>
 **<p> <li> Total Orders:** The total number of orders placed.<p/>
