@@ -2,9 +2,9 @@
 </p>This project analyses sales from a fictional company, including KPI's, sales trends and customer preferences. The goal is to provide the sales manager with data-driven insights to understand the business's performance. I have used SQL-driven data analysis alongside with Power BI visualizations, providing key insights to the business to make informed decisions.<p/>
 
 ## <p> About The Project <p/>
-### <p>Key Performance Indicators (KPIs)<p/>
-**<p> <li> Total Sales:** The sum of the total price of all pizza orders.<p/>
-**<p> <li> Average Order Value:** The average amount spent per order, calculated by dividng the total revenue by the total number of orders.<p/>
+### <p>Key Insights<p/>
+**<p> <li> Total Sales:** The sum of the total sales of all products filtered by year and month.<p/>
+**<p> <li> Budget Amount:** The total.<p/>
 **<p> <li> Total Pizzas Sold:** The sum of the quantities of all pizzas sold.<p/>
 **<p> <li> Total Orders:** The total number of orders placed.<p/>
 **<p> <li> Average Pizzas Per Order:** The average number of pizzas sold per order, calculated by dividing the total number of pizzas sold bby the total numver of orders.<p/>
