@@ -28,7 +28,7 @@
 <p> 4. Percentage change between Open and Close.</p>
 
 
-### <p> Benefits of this project ### <p/>
+### <p> Benefits of this project <p/>
 **<p> <li> Market Trends:** Provides key insights into stock price trends for Tesla. <p/>
 **<p> <li> Stock Trader Trends:** Idenitfy trends in quantity of stocks traded, historically. <p/>
 **<p> <li> Price Trends:** Idenitfy price trends of the Tesla stock. <p/>
