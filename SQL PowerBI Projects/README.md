@@ -11,5 +11,5 @@
 <p> - Target Audience: Restaurant owners, marketing teams and suppliers.</p>
 
 **<p> 2. AdventureWorks Sales Analysis** </p>
-<p> - Description: Analyses pizza sales data to provide insights into customer preferences, popular items and pricing stategies.</p>
+<p> - Description: Analyses sales from a fictional company to provide insights into sales trends, customer preferences and popular items.</p>
 <p> - Target Audience: Sales Manager and Sales Representatives at the company..</p>
