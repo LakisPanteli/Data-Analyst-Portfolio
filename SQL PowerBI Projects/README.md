@@ -12,4 +12,4 @@
 
 **<p> 3. AdventureWorks Sales Analysis** </p>
 <p> - Description: Analyses sales from a fictional company to provide insights into sales trends, customer preferences and popular items.</p>
-<p> - Target Audience: Sales Manager and Sales Representatives at the company..</p>
+<p> - Target Audience: Sales Manager and Sales Representatives at the company.</p>
