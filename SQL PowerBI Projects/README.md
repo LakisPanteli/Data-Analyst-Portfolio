@@ -1,4 +1,4 @@
-# <p>SQL and Power BI Projects</p>
+# <p>💻SQL and Power BI Projects</p>
 <p> This folder contains projects where I analysed data using SQL and Power BI for data visualtion. I use data analysis to provide key insights and visualise them in an appealing and interactive manner.</p>
 
 ## <p> Projects </p>
