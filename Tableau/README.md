@@ -1,4 +1,4 @@
-# Tableau Projects
+# 📊Tableau Projects
 <p> This file contains a link to my Tableau profile, where dashboards I have created can be found: 
 
   **<p> Tableau:** *https://public.tableau.com/app/profile/lakis.panteli/vizzes* </p>
