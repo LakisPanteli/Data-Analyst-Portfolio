@@ -1,4 +1,4 @@
-# <p>📊Power BI Reports<p/>
+# <p>📈Power BI Reports<p/>
 <p> This folder contains projects where I analysed and visualised data using Power BI. I use data analysis to transform raw data to provide key insights and visualise them in an appealing and interactive manner.</p>
 
 ## <p> Projects </p>
