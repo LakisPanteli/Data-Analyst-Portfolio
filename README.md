@@ -1,5 +1,5 @@
 # <p>💻Data Analyst Portfolio <p/>
-<p> Welcome to my Data Analyst Portfolio. I will showcase projects I have created using a variety of data tools such as SQL, Excel, PowerBI and Tableau.</p>
+<p> Welcome to my Data Analyst Portfolio. I will showcase projects I have created using a variety of data tools such as SQL, R, Excel, PowerBI and Tableau.</p>
 
 ## <p>📄What is in this Repository <p/>
 <p> <li> Category folders include projects, each with a README.md detailing the specific project</li></p>
