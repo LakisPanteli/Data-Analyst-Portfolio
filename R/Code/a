@@ -1,1 +1,431 @@
+rm(list=ls())
+library(MASS)
+library(ISLR)
+library(leaps)
+library(pls)
+library(boot)
+library(splines)
+library(gam)
+library(tree) 
+library(randomForest) 
+library(gbm) 
+library(glmnet)
+
+bikerental <- read.csv("~/Documents/day.csv")  #data set used
+summary(bikerental)
+attach(bikerental)
+View(bikerental)
+
+
+#Part 1
+# We want to predict cnt and see what ML method predicts it most accurately.
+#It is interesting/important because it could improve transport environemtnally
+
+
+#Part 2
+dim(bikerental)      #observations and variables
+cor(bikerental[,-2])  #correlation
+
+#Plots
+#boxplots:
+yr=as.factor(yr)
+plot(yr,cnt, ylab="cnt", xlab="yr")
+holiday=as.factor(holiday)
+plot(holiday,cnt, ylab="cnt",xlab="holiday")
+workingday=as.factor(workingday)
+plot(workingday,cnt, ylab="cnt", xlab="workingday")
+
+plot(season,cnt, ylab="cnt", xlab="season")
+plot(weathersit,cnt, ylab="cnt", xlab="weathersit")
+
+#scatterplots:
+pairs(bikerental)
+pairs(~cnt +season+yr+mnth+holiday+weekday+workingday+weathersit+temp+atemp+hum+windspeed)
+pairs(~cnt+temp)
+pairs(~cnt+atemp)
+pairs(~cnt+hum)
+pairs(~cnt+windspeed)
+
+
+#histogram
+hist(cnt, breaks=15)
+which.max(cnt)
+which.min(cnt)
+
+
+#Part 3
+
+#multiple linear regression
+set.seed(10)
+train.bike <- sample(1:731, 731/2) 
+bike.train <- bikerental[train.bike,]  #training data
+bike.test <- bikerental[-train.bike,]  #test data
+lm.bike1 <- lm(cnt ~ season + yr + mnth + holiday + weekday + workingday + weathersit + temp + atemp + hum + windspeed, data = bike.train)
+summary(lm.bike1)
+lm.pred.bike <- predict(lm.bike1, bike.test)
+mse.lm <- mean((lm.pred.bike - bike.test$cnt)^2)
+mse.lm   #test MSE
+
+
+# best subset selection
+regfit.bike <- regsubsets(cnt ~. -dteday -instant -casual -registered, data = bikerental, nvmax=11)
+summary(regfit.bike)
+reg.summary <- summary(regfit.bike)
+reg.summary$rsq
+
+par(mfrow = c(2,2))
+#cp
+plot(reg.summary$cp, xlab="no.of varbiables", ylab="CP", type="l")
+points(which.min(reg.summary$cp), reg.summary$cp[which.min(reg.summary$cp)],col="red",cex=2, pch=20)
+which.min(reg.summary$cp)
+#bic
+plot(reg.summary$bic, xlab="no.of varbiables", ylab="BIC", type="l")
+points(which.min(reg.summary$bic), reg.summary$bic[which.min(reg.summary$bic)],col="red",cex=2, pch=20)
+which.min(reg.summary$bic)
+#adj R2
+plot(reg.summary$adjr2, xlab="no.of varbiables", ylab="Adj R2", type="l")
+points(which.max(reg.summary$adjr2), reg.summary$adjr2[which.max(reg.summary$adjr2)],col="red",cex=2, pch=20)
+which.max(reg.summary$adjr2)
+
+#choosing best model
+coef(regfit.bike,8)
+
+#implement multiple linear regression on selected model:
+lm.best.subset <- lm(cnt ~ season + yr + holiday + weekday + weathersit +atemp +hum +windspeed, data = bike.train)
+summary(lm.best.subset)
+lm.pred.subset <- predict(lm.best.subset, bike.test)
+mse.lm.subset <- mean((lm.pred.subset - bike.test$cnt)^2)
+mse.lm.subset    #test MSE
+
+#forward stepwise selection
+reg.bike.fwd <- regsubsets(cnt ~. -dteday -instant -casual -registered, data = bikerental, nvmax=11, method = "forward")
+reg.bike.fwd.summary <- summary(reg.bike.fwd)
+reg.bike.fwd.summary
+names(reg.bike.fwd.summary)
+
+#cp
+par(mfrow = c(2,2))
+plot(reg.bike.fwd.summary$cp, xlab="no.of varbiables", ylab="CP", type="l")
+points(which.min(reg.bike.fwd.summary$cp), reg.bike.fwd.summary$cp[which.min(reg.bike.fwd.summary$cp)],col="red",cex=2, pch=20)
+which.min(reg.bike.fwd.summary$cp)
+
+#bic
+plot(reg.bike.fwd.summary$bic, xlab="no.of varbiables", ylab="BIC", type="l")
+points(which.min(reg.bike.fwd.summary$bic), reg.bike.fwd.summary$bic[which.min(reg.bike.fwd.summary$bic)],col="red",cex=2, pch=20)
+which.min(reg.bike.fwd.summary$bic)
+
+#adj R2
+plot(reg.bike.fwd.summary$adjr2, xlab="no.of varbiables", ylab="Adj R2", type="l")
+points(which.max(reg.bike.fwd.summary$adjr2), reg.bike.fwd.summary$adjr2[which.max(reg.bike.fwd.summary$adjr2)],col="red",cex=2, pch=20)
+which.max(reg.bike.fwd.summary$adjr2)
+
+#coefficients of best model:
+coef(reg.bike.fwd,8)
+# implement multiple linear regression with this model:
+lm.best.forward <- lm(cnt ~ season + yr + holiday + weekday + weathersit +atemp +hum +windspeed, data = bike.train)
+summary(lm.best.forward)
+lm.pred.forward <- predict(lm.best.forward, bike.test)
+mse.lm.forward <- mean((lm.pred.forward - bike.test$cnt)^2)
+mse.lm.forward  #test MSE
+
+
+#backward stepwise selection
+reg.bike.bwd <- regsubsets(cnt ~. -dteday -instant -casual -registered, data = bikerental, nvmax=11, method = "backward")
+reg.bike.bwd.summary <- summary(reg.bike.bwd)
+reg.bike.bwd.summary
+
+#cp
+par(mfrow = c(2,2))
+plot(reg.bike.bwd.summary$cp, xlab="no.of varbiables", ylab="CP", type="l")
+points(which.min(reg.bike.bwd.summary$cp), reg.bike.bwd.summary$cp[which.min(reg.bike.bwd.summary$cp)],col="red",cex=2, pch=20)
+which.min(reg.bike.bwd.summary$cp)
+#bic
+plot(reg.bike.bwd.summary$bic, xlab="no.of varbiables", ylab="BIC", type="l")
+points(which.min(reg.bike.bwd.summary$bic), reg.bike.bwd.summary$bic[which.min(reg.bike.bwd.summary$bic)],col="red",cex=2, pch=20)
+which.min(reg.bike.bwd.summary$bic)
+#adj R2
+plot(reg.bike.bwd.summary$adjr2, xlab="no.of varbiables", ylab="Adj R2", type="l")
+points(which.max(reg.bike.bwd.summary$adjr2), reg.bike.bwd.summary$adjr2[which.max(reg.bike.bwd.summary$adjr2)],col="red",cex=2, pch=20)
+which.max(reg.bike.bwd.summary$adjr2)
+
+#coefficients of best model:
+coef(reg.bike.bwd,8)
+# implement multiple linear regression with this model:
+lm.best.backward <- lm(cnt ~ season + yr + holiday + weekday + weathersit +atemp +hum +windspeed, data = bike.train)
+summary(lm.best.backward)
+lm.pred.backward <- predict(lm.best.backward, bike.test)
+mse.lm.backward <- mean((lm.pred.backward - bike.test$cnt)^2)
+mse.lm.backward  #test MSE
+
+#ridge regression
+set.seed(10)
+train.X <- model.matrix(cnt ~ . -dteday -casual -registered -instant, data=bike.train)[,-1]
+test.X <- model.matrix(cnt ~. -dteday -casual -registered -instant, data=bike.test)[,-1]
+grid <- 10^seq(5,-3, length=100)
+ridge.mod <- glmnet(train.X, bike.train$cnt, alpha = 0, lambda=grid)
+ridge.cv <- cv.glmnet(train.X, bike.train$cnt, alpha = 0, lambda=grid)
+
+plot(ridge.cv)
+
+#best lambda value
+ridge.bestlam <- ridge.cv$lambda.min
+ridge.bestlam
+ridge.pred <- predict(ridge.mod, s=ridge.bestlam, newx=test.X)
+mean((ridge.pred - bike.test$cnt)^2)   #test MSE
+
+# within 1 se
+ridge.1se <- ridge.cv$lambda.1se
+ridge.1se
+ridge.pred2 <- predict(ridge.mod, s = ridge.1se, newx = test.X)
+mean((ridge.pred2 - bike.test$cnt)^2)   
+
+mse.ridge <- mean((ridge.pred - bike.test$cnt)^2)   #test MSE
+mse.ridge
+
+#lasso
+set.seed(10)
+lasso.mod <- glmnet(train.X, bike.train$cnt, alpha = 1, lambda = grid)
+lasso.cv <- cv.glmnet(train.X, bike.train$cnt, alpha = 1, lambda = grid)
+
+plot(lasso.cv)
+
+#best lambda value
+lasso.bestlam <- lasso.cv$lambda.min
+lasso.bestlam
+lasso.pred <- predict(lasso.mod, s = lasso.bestlam, newx = test.X)
+mean((lasso.pred - bike.test$cnt)^2)    #test MSE
+predict(lasso.mod,type="coefficients",s=lasso.bestlam)
+
+# Most sparse lasso model with 1 se
+lasso.bestlam2 <- lasso.cv$lambda.1se
+lasso.bestlam2
+lasso.pred2 <- predict(lasso.mod, s = lasso.bestlam2, newx = test.X)
+mean((lasso.pred2 - bike.test$cnt)^2)   
+predict(lasso.mod,type="coefficients",s=lasso.bestlam2) 
+# 3 zero coefficients on variables.
+
+mse.lasso <- mean((lasso.pred - bike.test$cnt)^2)  #test MSE
+mse.lasso
+
+#pcr
+set.seed(10)
+pcr.mod <- pcr(cnt ~ . -dteday -instant -casual -registered, data = bike.train, scale = TRUE, validation = "CV")
+summary(pcr.mod)
+validationplot(pcr.mod, val.type = "MSEP")
+
+#test MSE when ncomp=7
+pcr.pred2 = predict(pcr.mod, bike.test, ncomp=7)
+mean((bike.test$cnt - pcr.pred2)^2)  #test MSE
+mse.pcr2 <- mean((bike.test$cnt - pcr.pred2)^2)
+mse.pcr2  #test MSE
+
+#pls
+set.seed(10)
+pls.mod <- plsr(cnt ~ . -dteday -instant -casual -registered, data = bike.train, scale = TRUE, validation = "CV")
+summary(pls.mod)
+validationplot(pls.mod, val.type = "MSEP")
+
+#test MSE when ncomp=8
+pls.pred2 <- predict(pls.mod, bike.test, ncomp = 8)
+mean(( bike.test$cnt - pls.pred2)^2) 
+mse.pls2 <- mean(( bike.test$cnt - pls.pred2)^2)
+mse.pls2   #test MSE
+
+#GAM
+#top 3 variables:
+coef.fwd.step <- coef(reg.bike.fwd, id=3)
+names(coef.fwd.step)
+#cv for degrees of freedom:
+#season
+set.seed(10)
+cv.err <- rep(0, 18)
+for (i in 3:20) {
+  cv.fit <- glm(cnt ~ s(season, df = i), data = bikerental)
+  cv.err[i-2] <- cv.glm(bikerental, cv.fit, K = 10)$delta[1]
+}
+cv.err
+plot(3:20, cv.err, ylab = "Test MSE", xlab = "Degrees of Freedom", type = "l") 
+which.min(cv.err)
+#atemp
+set.seed(10)
+cv.err2 <- rep(0, 18)
+for (i in 3:20) {
+  cv.fit2 <- glm(cnt ~ s(atemp, df = i), data = bikerental)
+  cv.err2[i-2] <- cv.glm(bikerental, cv.fit2, K = 10)$delta[1]
+}
+cv.err2
+plot(3:20, cv.err2, ylab = "Test MSE", xlab = "Degrees of Freedom", type = "l") 
+which.min(cv.err2)
+#GAM with the top 3 variables
+gam.fit2 <- gam(cnt ~ s(season, df=4) + yr + s(atemp, df=9), data=bike.train)
+par(mfrow = c(2, 3))
+plot(gam.fit2, se = T, col = "green")
+
+gam.pred2 <- predict(gam.fit2, bike.test)
+mean((bike.test$cnt - gam.pred2)^2)  #test MSE
+
+mse.gam <- mean((bike.test$cnt - gam.pred2)^2) # test MSE
+# R2 = MSS/TSS = (TSS-RSS)/TSS = 1 - RSS/TSS
+R2 <- 1 - sum((bike.test$cnt - gam.pred2)^2) / sum((bike.test$cnt - mean(bike.test$cnt))^2)
+R2
+
+summary(gam.fit2)
+
+
+#regression tree
+regtree.bike  <- tree(cnt ~ . -dteday -instant -casual -registered, data = bike.train)
+summary(regtree.bike)
+plot(regtree.bike)
+text(regtree.bike, pretty=0)
+pred.bike <- predict(regtree.bike, newdata = bike.test)
+mean((pred.bike - bike.test$cnt)^2)
+
+#tree pruning
+set.seed(10)
+cv.bike <- cv.tree(regtree.bike) 
+cv.bike
+which.min(cv.bike$dev)
+par(mfrow=c(1,2))
+plot(cv.bike$size, cv.bike$dev, type = "b") #  min occurs at size 1
+plot(cv.bike$k, cv.bike$dev, type = "b")
+
+# tree- pruning
+prune.bike <- prune.tree(regtree.bike,best = 12)
+plot(prune.bike)
+text(prune.bike,pretty=0)
+
+pred.bike2 <- predict(prune.bike, newdata = bike.test)
+mean((pred.bike2 - bike.test$cnt)^2)   
+
+mse.regression.tree.prune <- mean((pred.bike2 - bike.test$cnt)^2) #test MSE
+
+#bagging
+set.seed(10)
+bagging.bike <- randomForest(cnt ~. -dteday -instant -casual -registered, data = bike.train, mtry = 11, importance = TRUE, ntree=1000)
+bagging.bike
+pred.bagging <- predict(bagging.bike, newdata = bike.test)
+mean((pred.bagging  - bike.test$cnt)^2)
+
+mse.bagging <- mean((pred.bagging  - bike.test$cnt)^2)  #test MSE
+#variable importance 
+importance(bagging.bike) 
+varImpPlot(bagging.bike)
+
+#random forests
+#change mtry from bagging
+#do it from mtry = 10 to mtry =1
+#mtry=10
+set.seed(10)
+rf0.bike <- randomForest(cnt ~. -dteday -instant -casual -registered, data = bike.train, mtry = 10, importance = TRUE, ntree=1000)
+rf0.bike
+pred.rf0 <- predict(rf0.bike, newdata = bike.test)
+mean((pred.rf0  - bike.test$cnt)^2)
+
+#mtry=9
+set.seed(10)
+rf0.bike1 <- randomForest(cnt ~. -dteday -instant -casual -registered, data = bike.train, mtry = 9, importance = TRUE, ntree=1000)
+rf0.bike1
+pred.rf01 <- predict(rf0.bike1, newdata = bike.test)
+mean((pred.rf01  - bike.test$cnt)^2)
+
+#mtry=8
+set.seed(10)
+rf0.bike2 <- randomForest(cnt ~. -dteday -instant -casual -registered, data = bike.train, mtry = 8, importance = TRUE, ntree=1000)
+rf0.bike2
+pred.rf02 <- predict(rf0.bike2, newdata = bike.test)
+mean((pred.rf02  - bike.test$cnt)^2)
+
+#mtry=7
+set.seed(10)
+rf0.bike3 <- randomForest(cnt ~. -dteday -instant -casual -registered, data = bike.train, mtry = 7, importance = TRUE, ntree=1000)
+rf0.bike3
+pred.rf03 <- predict(rf0.bike3, newdata = bike.test)
+mean((pred.rf03  - bike.test$cnt)^2)
+
+#mtry=6
+set.seed(10)
+rf0.bike4 <- randomForest(cnt ~. -dteday -instant -casual -registered, data = bike.train, mtry = 6, importance = TRUE, ntree=1000)
+rf0.bike4
+pred.rf04 <- predict(rf0.bike4, newdata = bike.test)
+mean((pred.rf04  - bike.test$cnt)^2)
+
+#mtry=5
+set.seed(10)
+rf0.bike5 <- randomForest(cnt ~. -dteday -instant -casual -registered, data = bike.train, mtry = 5, importance = TRUE, ntree=1000)
+rf0.bike5
+pred.rf05 <- predict(rf0.bike5, newdata = bike.test)
+mean((pred.rf05  - bike.test$cnt)^2)
+
+mse.rf0.bike5 <- mean((pred.rf05  - bike.test$cnt)^2) #test MSE
+#important variables
+importance(rf0.bike5)
+varImpPlot(rf0.bike5)
+
+#mtry=4
+set.seed(10)
+rf0.bike6 <- randomForest(cnt ~. -dteday -instant -casual -registered, data = bike.train, mtry = 4, importance = TRUE, ntree=1000)
+rf0.bike6
+pred.rf06 <- predict(rf0.bike6, newdata = bike.test)
+mean((pred.rf06  - bike.test$cnt)^2)
+
+#mtry=3
+set.seed(10)
+rf0.bike7 <- randomForest(cnt ~. -dteday -instant -casual -registered, data = bike.train, mtry = 3, importance = TRUE, ntree=1000)
+rf0.bike7
+pred.rf07 <- predict(rf0.bike7, newdata = bike.test)
+mean((pred.rf07 - bike.test$cnt)^2)
+
+#mtry=2
+set.seed(10)
+rf0.bike8 <- randomForest(cnt ~. -dteday -instant -casual -registered, data = bike.train, mtry = 2, importance = TRUE, ntree=1000)
+rf0.bike8
+pred.rf08 <- predict(rf0.bike8, newdata = bike.test)
+mean((pred.rf08  - bike.test$cnt)^2)
+
+#mtry=1
+set.seed(10)
+rf0.bike9 <- randomForest(cnt ~. -dteday -instant -casual -registered, data = bike.train, mtry = 1, importance = TRUE, ntree=1000)
+rf0.bike9
+pred.rf09 <- predict(rf0.bike9, newdata = bike.test)
+mean((pred.rf09  - bike.test$cnt)^2)
+
+
+
+#boosting
+set.seed(10)
+lambda <- 10^seq(from=-5,to=-0.5,by=0.05) # shrinkage parameter
+train.error <- rep(-1, length(lambda))
+
+for (i in 1:length(lambda)) {
+  boosting.bike <- gbm(cnt ~ . -dteday -instant -casual -registered, data = bike.train, distribution = "gaussian", n.trees = 1000, shrinkage = lambda[i])
+  pred.bike.train <- predict(boosting.bike, bike.train, n.trees = 1000)
+  train.error[i] <- mean((pred.bike.train - bike.train$cnt)^2)
+}
+plot(lambda, train.error, type = "b", xlab = "Lambda", ylab = "Training MSE")
+
+#test error
+set.seed(10)
+test.error <- rep(-1, length(lambda))
+
+for (i in 1:length(lambda)) {
+  boosting.bike <- gbm(cnt ~ . -dteday -instant -casual -registered, data = bike.train, distribution = "gaussian", n.trees = 1000, shrinkage = lambda[i])
+  pred.bike.test <- predict(boosting.bike, bike.test, n.trees = 1000)
+  test.error[i] <- mean((pred.bike.test - bike.test$cnt)^2)
+}
+
+plot(lambda, test.error, type = "b", xlab = "Lambda", ylab = "Test MSE")
+bestlam.boosting <- lambda[which.min(test.error)] # shrinkage parameter - lambda - corresponding to the minimum
+bestlam.boosting
+min(test.error) # minimum test MSE 
+
+mse.boosting <- min(test.error) #test MSE
+#most important variables
+boosting.hitters <- gbm(cnt ~ . -dteday -instant -casual  -registered, data = bikerental, distribution = "gaussian", n.trees = 1000, shrinkage = bestlam.boosting)
+summary(boosting.hitters)
+
+
+
+#Part 4:
+#test MSE for all methods:
+rbind(mse.lm, mse.lm.subset, mse.lm.forward, mse.lm.backward, mse.ridge, mse.lasso, mse.pcr2, mse.pls2, mse.gam, mse.regression.tree.prune, mse.bagging, mse.rf0.bike5, mse.boosting)
 
