@@ -86,7 +86,7 @@ Boosting is the final method I used, which also improves the predictions from a 
 <img width="447" height="339" alt="image" src="https://github.com/user-attachments/assets/935df275-8c62-4daa-bc36-70180acab00a" />
 <p>The graph on the left shows the values of lambda with the lowest training MSE and lowest test MSE. The value of the lamba used is shown on the graph that shows the test MSE and the value is 0.0708.</p>
 
-**<p> Conclusion** </p>
+## <p> Conclusion </p>
 <p>In this project I have, firstly, set out the problem I tried to answer, which was to work out which machine learning method best predicts the count of total rental bikes (‘cnt’) each day over a two year basis. I did this by measuring the test MSE of each method and the one with the lowest predicts the response variable ‘cnt’ the best.</p> 
 
 <p>Next, I explored the data, removing any variables that were not necessary in this problem. I found the number of variables and observations in the data set, finding which variables seemed most important. I then created some graphs, including box plots, scatterplots and histograms and explained what was being shown in these graphs.</p>
