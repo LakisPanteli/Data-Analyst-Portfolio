@@ -1,0 +1,5 @@
+# Bike Rental Analysis
+## Introduction
+<p>In this project I will be trying to find the Machine Learning method that best predicts the count of total rental bikes (‘cnt’) each day over a two-year period. That means I will be measuring the test error rates of each method and the one with the least test error will be the one that most accurately predicts ‘cnt’. I shall use the test mean squared error (MSE) to measure how close the predicted response value for a given observation is to the true response value for that observation. The smaller the value of the test MSE, the closer the predicted responses are to the true response value.</p>
+<p>The methods I will be using are multiple linear regression, best subset selection, forward and backward stepwise selection, Ridge regression, the Lasso, Principal Components Regression (PCR), Partial Least Squares (PLS), Generalised Additive Models (GAM), Regression Trees, Bagging, Random Forests and Boosting.</p>
+<p> Data and exploratory analysis </p> 
