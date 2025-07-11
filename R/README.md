@@ -78,6 +78,7 @@
 
 **<p> Random Forests** </p>
 Random Forests improve the bagging method by decorrelating the trees. This is done by using a subset of the predictor variables, reducing variance. After running a model with all different possibilities of the number of variables randomly sampled as candidates at each split (mtry = 10 to mtry =1), I found using mtry = 5 performed the best. The test MSE with mtry = 5 is 517,961.7. This is the best model out of any used so far. The variable ‘yr’ appears to be the most important variable due to the percentage decrease in accuracy if it was removed from the model would be 162.1%, as well as having a high decrease in node impurity averaged over all the trees of 376681220. Other important variables in this model are ‘hum’, ‘atemp’ ‘temp’ and ‘mnth’ as shown by the graph here. These are the same variables that were important in the bagging model. The graph below shows this.
+
 <img width="706" height="603" alt="image" src="https://github.com/user-attachments/assets/6ebe4e1d-efee-45b8-94f8-e7544bbcdefc" />
 
 **<p> Boosting** </p>
