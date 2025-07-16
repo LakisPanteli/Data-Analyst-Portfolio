@@ -5,9 +5,9 @@
 **<p> 1. The Billionaires Analysis 2025** </p>
 <p><li>Description: Analyses data about billionaires in the world.</li></p>
 <p><li> Key Performance Indicators (KPIs): </li></p>
-<p> 1. Average Net Worth.</p>
-<p> 2. Average Age.</p>
-<p> 3. Billionaire Count.</p>
+<p> - Average Net Worth.</p>
+<p> - Average Age.</p>
+<p> - Billionaire Count.</p>
 <p><li>Visualisations:</li></p>
 <p> 1. Top 25 Billionaires, by Net Worth and Age.</p>
 <p> 2. Top Categories by Net Worth.</p>
