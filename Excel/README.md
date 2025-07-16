@@ -9,7 +9,7 @@
 <p> - Average Age.</p>
 <p> - Billionaire Count.</p>
 <p><li>Visualisations:</li></p>
-<p> 1. Top 25 Billionaires, by Net Worth and Age.</p>
-<p> 2. Top Categories by Net Worth.</p>
+<p> - Top 25 Billionaires, by Net Worth and Age.</p>
+<p> - Top Categories by Net Worth.</p>
   
 <p><li>Target Audience: News reporters, economic and political figures, public.</li></p>
