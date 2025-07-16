@@ -3,7 +3,13 @@
 
 ## <p> Projects </p>
 **<p> The Billionaires Analysis 2025** </p>
-<p> - Description: Analyses data about billionaires in the world.</p>
-<p> - KPIs: 
+<p><li>Description: Analyses data about billionaires in the world.</li></p>
+<p><li> Key Performance Indicators (KPIs): </li></p>
+<p> 1. Average Net Worth.</p>
+<p> 2. Average Age.</p>
+<p> 3. Billionaire Count.</p>
+<p><li>Visualisations:</li></p>
+<p> 1. Top 25 Billionaires, by Net Worth and Age.</p>
+<p> 2. Top Categories by Net Worth.</p>
   
-<p> - Target Audience: Restaurant owners, marketing teams and suppliers.</p>
+<p><li>Target Audience: News reporters, economic and political figures, public.</li></p>
