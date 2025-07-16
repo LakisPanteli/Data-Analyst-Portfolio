@@ -2,7 +2,7 @@
 <p> This folder contains projects where I analysed data and created dashboards using Excel. I use data analysis to provide key insights and visualise them in an appealing and interactive manner.</p>
 
 ## <p> Projects </p>
-**<p> The Billionaires Analysis 2025** </p>
+**<p> 1. The Billionaires Analysis 2025** </p>
 <p><li>Description: Analyses data about billionaires in the world.</li></p>
 <p><li> Key Performance Indicators (KPIs): </li></p>
 <p> 1. Average Net Worth.</p>
