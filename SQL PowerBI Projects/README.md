@@ -7,8 +7,8 @@
 <p> - Target Audience: Restaurant owners, marketing teams and suppliers.</p>
 
 **<p> 2. Video Game Analysis** </p>
-<p> - Description: Analyses pizza sales data to provide insights into customer preferences, popular items and pricing stategies.</p>
-<p> - Target Audience: Restaurant owners, marketing teams and suppliers.</p>
+<p> - Description: Analyses video games sales data to provide insights into customer preferences, popular games and region specific sales.</p>
+<p> - Target Audience: Publishers, marketing teams and suppliers.</p>
 
 **<p> 3. AdventureWorks Sales Analysis** </p>
 <p> - Description: Analyses sales from a fictional company to provide insights into sales trends, customer preferences and popular items.</p>
