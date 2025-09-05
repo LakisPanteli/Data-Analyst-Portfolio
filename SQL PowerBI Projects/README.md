@@ -8,7 +8,7 @@
 
 **<p> 2. Video Game Analysis** </p>
 <p> - Description: Analyses video games sales data to provide insights into customer preferences, popular games and region specific sales.</p>
-<p> - Target Audience: Publishers, marketing teams and suppliers.</p>
+<p> - Target Audience: Developers, publishers, marketing teams and suppliers.</p>
 
 **<p> 3. AdventureWorks Sales Analysis** </p>
 <p> - Description: Analyses sales from a fictional company to provide insights into sales trends, customer preferences and popular items.</p>
